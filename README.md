@@ -1,7 +1,5 @@
 # Airbnb Project
 ## Data Description and Technical Analysis
-#### Yamato, Amber, Yanni
-
 
 ### Data:
  _Our data was collected from Inside Airbnb_
