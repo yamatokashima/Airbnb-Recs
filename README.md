@@ -2,65 +2,90 @@
 ## Data Description and Technical Analysis
 
 ### Data:
- _Our data was collected from Inside Airbnb_
-_This data was taken from Airbnb and we assume that is was computer generated_
-_We referenced websites such as Zillow and Hospitable to find information about long term rentals and the added costs of short term rentals_
-_We referenced reports from the City of Dallas to understand their HOT or Occupancy Tax_
+Introduction
+The goal of this project was to create a rental recommendation for Sara’s property in Dallas, Texas  while she is in a nurse practitioner program in Buffalo, New York. With Airbnb being a popular way to earn passive income, the team decided to look into both short term and long term rental options for Sara’s two bedroom home, while keeping in mind that Sara will have limited capacity to manage the rental from afar. The overarching goal was to find a rental recommendation for the house that would allow Sara to cover as many of the baseline costs including mortgage, taxes, and insurance  as possible while requiring the least of her involvement. 
 
-### Deleted columns:
-* ~~Listing UR~~
-* ~~Scrape ID~~
-* ~~Last Scraped~~
-* ~~Source~~
-* ~~Picture URL~~
-* ~~Host URL~~
-* ~~Host Name~~
-* ~~Host About~~
-* ~~Host Thumbnail URL~~
-* ~~Host Picture URL~~
-* ~~Host Profile Picture~~
-* ~~Host Identity~~
-* ~~Host Verifications~~
-* ~~Latitude~~
-* ~~Longitude~~
-* ~~Minimum Minimum Nights~~
-* ~~Maximum Minimum Nights~~
-* ~~Maximum Maximum Nights~~
-* ~~Minimum Nights Average~~
-* ~~Maximum Nights Average~~
-* ~~Calendar Updated~~
-* ~~Has Availability~~
-* ~~Availability 30~~
-* ~~Availability 60~~
-* ~~Availability 90~~
-* ~~Availability 365~~
-* ~~Calendar Last Scraped~~
-* ~~Calculated Host Listings~~
+### Background 
+ Sara recently placed a 20% down payment on a two bedroom home in Dallas, Texas for $450,000. In recent years many people have generated passive income on short term rentals through Airbnb. Turning a profit on these properties requires the right property and significant amounts of work from the host. As Airbnb has become more popular, more people have started to examine the impacts of short term rentals on the housing and long term rental market, and many cities including the city of Dallas, have started to apply short term occupancy taxes and create new regulations to account for these challenges.
+ Our analysis looked at all of the market trends outlined above and was structured around examining what type of profit was possible for Sara to generate on a short term basis given the style and location of her home. We also decided to examine what type of involvement Sara would need to make the property as profitable as possible. We then did an analysis of the long term housing possibilities for the home and the rental market in Dallas and did a comparison between the two. 
 
-### Added/Updated Columns:
-* Filtered for just two bedroom listings
-* Filtered room_type to Entire Home/Apt
-* Filtered for District 1 only
-* Filled blanks on review scores with the median score, as there was some skewness
-* Added occupancy rate
-* With an assumed occupancy rate of 50%, we multiplied number of reviews by 2, and then we multiplied that value by the minimum nights to get an estimate of occupancy over the lifetime of the listing
-* Added revenue column
-* Using an estimate of $143, based on similar rentals
-* Added host region column
-* Host region was found by classifying hosts as inside or outside of the city of Dallas by using the neighborhood column
+### Technical Details
+Our key metric for this project was to use occupancy rate, as later detailed on how we ended up on this metric and how we went about measuring it. Some of the analysis for this included a comparison of host response time and occupancy, host location and occupancy as well as occupancy rate associated with many aspects of the home details. To do our calculations and visualizations, our main tools used were Microsoft Excel and Microsoft Power BI. We also utilized index searches to find most of our long-term rental data, since we could not find this information on InsideAirbnb’s site, which could pose as an issue, as the method of collecting data may be different.
+
+Our presentation highlighted many of the associations that we perceived as significant. These results mainly comprised of one-to-one comparisons. We used a variety of pivot tables, pivot graphs, and many of Power BI’s variety of charts and graphs to use in our presentation to clearly ad accurately display of findings within Google Slides. We were able to import all our data from Excel directly into Power BI. Once we finished the visualizations, we imported them to Slides by grabbing screenshots and uploading them as images.
+
+A challenge for us was trying to figure out a way to implement the amenities data and find the best way to clean the information. The way we went about this was to first use the ‘Find & Replace’ tool to get rid of the unnecessary open/close brackets, single quotes, and spaces. We then copied all the column information, pasted it into its own excel sheet, used the text-to-columns function to put each amenity into its own cell, highlighted all rows and columns with amentities data, renamed the highlighted box to “Amenities”, input the function: 
+
+_“=INDEX(Amenities,1+INT((ROW(A1)-1)/COLUMNS(Amenities)),MOD(ROW(A1)-1+COLUMNS(Amenities),COLUMNS(Amenities))+1_ to put all of the cells into one row. After, we input the =UNIQUE function in a new column to find all unique cells from the amenities, then did the =COUNTIF function to see how many occurrences of each unique amenity appears. We were able to find the top amenities by number of occurrences so that we could make a recommendation for Sara on what’s important to Airbnb guests.
+ 
+### Implementation
+In order to make a recommendation for Sara’s property we needed an understanding of long term and short term rentals in the city of Dallas and an analysis of host involvement for each type of property to find the option that would ask the least of Sara and allow her to appropriately cover the costs of the property while she is in her program.
+
+When looking at host involvement we considered the information that we had about host response time, host location, booking options such as instant booking, and reviews. Due to lack of information occupancy and revenue, our initial analysis relied heavily on the assumption that higher review ratings were associated with higher rates of booking. 
+When using average reviews as a key metric, we ran into several challenges including how to categorize reviews as low, medium, or high. 
+
+### Descriptive Statistics for Average Reviews
+
+| Aggregation| Value|
+| ----------- | ----------- |
+| Median     | 4.85 |
+| Mean       | 4.72 |
+| Mode       |  5   |
+| Minimum    |  0   |
+| Maximum    |  5   |
+
+Majority of the reviews were above 4.0 which made it very difficult to classify something as a good or bad review. In addition, it was very difficult to know how many people actually left a review and we had no real proof that a higher review resulted in higher rates of booking.
+Once we were able to calculate an estimated occupancy rate using the San Francisco model cited on Inside Airbnb’s website, we were able to test the relationship between reviews and occupancy rate. With the initial calculation, we took the number of reviews and multiplied this by 2 to account for a 50% review rate. We then multiplied this value by the minimum night stay value. When running a regression analysis between the two variables: average review rating and occupancy rate, our R2 value was less than 0.5 as seen below. While this linear regression model does not show correlation, we are able to see that there is some sort of positive relationship between the two variables, possibly an exponential relationship. We decided that an estimated occupancy rate was a more reliable key metric because it was an indicator of customer action, instead of opinion. 
+
+### Regression Analysis: 
+
+![image]([/Users/yamatokashima/Desktop/DAIR/Unit 1 Project - Airbnb/Regression.png](https://drive.google.com/file/d/1aBzXA1pOFq2L6LNlvtRo2JWfCOnkq4ma/view?usp=share_link))
+
+Once we confirmed our key metric as occupancy rate, we outlined our analysis as follows:
+
+* Host Involvement and Occupancy rate:
+* Compare occupancy rate and booking option instant book or non instant book
+* Compare occupancy rate and host response time
+* Compare occupancy rate and host location (inside or outside the city of Dallas) 
+
+### Short Term Rental Analysis
+* Compare amenities and rates of occupancy
+* Compare  occupancy rate and number of beds
+* Compare occupancy rate and number of guests
+* Find the average cost per night based on location
+
+### Long Term Rental Analysis
+* Find long term rental costs
+* Examine long term rental market in Dallas Texas
+
+
+### Results
+The findings of the research were interesting to say the least. We found that the number Sara needed to cover every month to break even was going to be $3,067 which comes to a grand total of $36,804. We examined the short term Airbnb data and found out that the gross income would be around $3,045 monthly. The downside of that option was the enormous fees: the 30% property fee accompanied by a couple other fees brought the net revenue between $8,697 and $11,197. The long term data revealed that the average price in Dallas for a 2 bedroom house was around $2,200, with the gross income totaling $26,400. The advantage that the long term option had over the short term was avoiding a lot of the fees. By going long term the property manager fee is cut down from 30% to 10% and would also avoid the HOT/booking fees. This brought our net revenue down to between $21,460 and $22,360 which was much more than the long term option.
+
+### Conclusion 
+After everything was said and done we realized both routes lead to a loss, the only thing we can do is try to cut our losses shorter. Our initial prediction was right and wrong at the same time; we initially speculated that the short term would bring Sara more revenue but wouldn't be the ideal due to her circumstances at the moment. To our surprise not only did the long term outperform the short term revenue , but it doubled the amount of revenue we would see. This further strengthens our suggestion to go with the long term route because the short term has no logical benefits.
+
+## References
+### Data and information:
+* Inside Airbnb
+* DallasCityHall  
+* Hospitable
+* US Census
+* Rent
+* Zillow
+* Redfin
+* SmartAsset
+
+### Technologies:
+* Microsoft Excel
+* Microsoft PowerBI
+* Trello
+* Google Slides
+* Google Drive
+* Google Sheets
+* Slack
+
+### Techniques:
+•	Harry McKaig and team (Evan Meyer and Adam Klesitz) for helping us with the idea of using Occupancy Rate as our key metric
 
 Access original datasources and my updated datasources [here](https://drive.google.com/drive/folders/1eI0hxKTkzH3s82YG6-dMvt-D15b98He1?usp=sharing "Dallas Airbnb Data")
-
-### Analysis Description
-       
-   In order to make a recommendation for Sara’s property we needed an understanding of long term and short term rentals in the city of Dallas and an analysis of host involvement for each type of property to find the option that would ask the least of Sara and allow her to appropriately cover the costs of the property while she is in her program.
-    
-   When looking at host involvement we considered the information that we had about host response time, host location, booking options such as instant booking, and reviews. Due to lack of information occupancy and revenue, our initial analysis relied heavily on the assumption that higher review ratings were associated with higher rates of booking. Once we were able to calculate an estimated occupancy rate using the San Francisco model cited on Inside Airbnb’s website, we were able to test this relationship. With the initial calculation, we took the number of reviews and multiplied this by 2 to account for a 50% review rate. We then multiplied this value by the minimum night stay value. When running a regression analysis between the two variables: average review rating and occupancy rate, our R^2 value was less than 0.5. We decided that an estimated occupancy rate was a more reliable key metric because it was an indicator of customer action, instead of opinion. 
-    
-   We compared estimated occupancy rate for the lifetime of the listing to host response time and found strong associations between quick host response times and higher rates of occupancy. This was a key insight into our recommendation because we assume that Sara is a full time nurse while she is in school, and that time will be her most precious resource. We do not believe that she will have capacity to respond to each airbnb message in a timely manner, which would impact her occupancy rates. In addition, we also found strong associations with the average occupancy rate and the host’s location. We created a host location column that classified if a host was located within the city of Dallas or outside. When looking at average occupancy, hosts that lived inside the city of Dallas were associated with higher rates of average occupancy: 319 nights compared to 70 nights for hosts who lived outside of the city. This is relevant, as our host will be based in New York while she is managing the property. Lastly, we looked at instant booking as a way to see if this would impact occupancy rates, as this might be a viable option for Sara who is limited on time. When looking at District 1 in Dallas where Sara’s house is located, we discovered that properties without instant booking had higher overall rates of occupancy. All of these metrics on host involvement allow us to conclude that higher host involvement is associated with higher rates of booking, which is difficult for our client.
-    
-   We came to the $145 nightly rate, as there were a few outliers in our data that skewed our average rate ($245.35). For the short term yearly costs, we took the nightly rental income, multiplied it by 21 (based on the 70% occupancy cap that Inside Airbnb provided), then multiplied it again by 12 months. We also deducted costs for a property manager, booking fees, HOT taxes, maintenance and repair costs, and furnishing costs to come to the final yearly revenue number. 
-    
-   Our strategy to find the most commonly used amenities was to take all of the individual amenities and separate them into their own cells. Then, aggregate all of the cells into one column, find all of the unique values, and use a =COUNTIF function to populate the number of times each unique value was used.
-    
-   To break down the long term analysis we had to gather data outside the inside airbnb website.To find the average home price in Dallas we looked up the average sale price of homes within the last 2 years and came up with $450,000 via redfin. The next question was what would be the month to month cost on mortgage. We retrieved a mortgage calculator and put $450,000 with a down payment of 20% which came out to $90,000.With those specifications our mortgage on a 30 year loan came up to $3067/month with taxes and insurance.Our next step was finding out where to price our home in that market. To do that we went on to Zillow.com and Rent.com, where we took every listing available on 12/18/2022 and came up with the average rent of $2200.
