@@ -39,7 +39,7 @@ Once we were able to calculate an estimated occupancy rate using the San Francis
 
 ### Regression Analysis: 
 
-![image](/Users/yamatokashima/Desktop/DAIR/Airbnb/Regression.png)
+![regression](/Users/yamatokashima/Desktop/DAIR/Airbnb/Regression.png)
 
 Once we confirmed our key metric as occupancy rate, we outlined our analysis as follows:
 
