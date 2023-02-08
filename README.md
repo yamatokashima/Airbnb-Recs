@@ -8,46 +8,46 @@ _We referenced websites such as Zillow and Hospitable to find information about 
 _We referenced reports from the City of Dallas to understand their HOT or Occupancy Tax_
 
 ### Deleted columns:
-~~Listing UR~~
-~~Scrape ID~~
-~~Last Scraped~~
-~~Source~~
-~~Picture URL~~
-~~Host URL~~
-~~Host Name~~
-~~Host About~~
-~~Host Thumbnail URL~~
-~~Host Picture URL~~
-~~Host Profile Picture~~
-~~Host Identity~~
-~~Host Verifications~~
-~~Latitude~~
-~~Longitude~~
-~~Minimum Minimum Nights~~
-~~Maximum Minimum Nights~~
-~~Maximum Maximum Nights~~
-~~Minimum Nights Average~~
-~~Maximum Nights Average~~
-~~Calendar Updated~~
-~~Has Availability~~
-~~Availability 30~~
-~~Availability 60~~
-~~Availability 90~~
-~~Availability 365~~
-~~Calendar Last Scraped~~
-~~Calculated Host Listings~~
+* ~~Listing UR~~
+* ~~Scrape ID~~
+* ~~Last Scraped~~
+* ~~Source~~
+* ~~Picture URL~~
+* ~~Host URL~~
+* ~~Host Name~~
+* ~~Host About~~
+* ~~Host Thumbnail URL~~
+* ~~Host Picture URL~~
+* ~~Host Profile Picture~~
+* ~~Host Identity~~
+* ~~Host Verifications~~
+* ~~Latitude~~
+* ~~Longitude~~
+* ~~Minimum Minimum Nights~~
+* ~~Maximum Minimum Nights~~
+* ~~Maximum Maximum Nights~~
+* ~~Minimum Nights Average~~
+* ~~Maximum Nights Average~~
+* ~~Calendar Updated~~
+* ~~Has Availability~~
+* ~~Availability 30~~
+* ~~Availability 60~~
+* ~~Availability 90~~
+* ~~Availability 365~~
+* ~~Calendar Last Scraped~~
+* ~~Calculated Host Listings~~
 
 ### Added/Updated Columns:
--Filtered for just two bedroom listings
--Filtered room_type to Entire Home/Apt
--Filtered for District 1 only
--Filled blanks on review scores with the median score, as there was some skewness
--Added occupancy rate
--With an assumed occupancy rate of 50%, we multiplied number of reviews by 2, and then we multiplied that value by the minimum nights to get an estimate of occupancy over the lifetime of the listing
--Added revenue column
--Using an estimate of $143, based on similar rentals
--Added host region column
--Host region was found by classifying hosts as inside or outside of the city of Dallas by using the neighborhood column
+* Filtered for just two bedroom listings
+* Filtered room_type to Entire Home/Apt
+* Filtered for District 1 only
+* Filled blanks on review scores with the median score, as there was some skewness
+* Added occupancy rate
+* With an assumed occupancy rate of 50%, we multiplied number of reviews by 2, and then we multiplied that value by the minimum nights to get an estimate of occupancy over the lifetime of the listing
+* Added revenue column
+* Using an estimate of $143, based on similar rentals
+* Added host region column
+* Host region was found by classifying hosts as inside or outside of the city of Dallas by using the neighborhood column
 
 Access original datasources and my updated datasources [here](https://drive.google.com/drive/folders/1eI0hxKTkzH3s82YG6-dMvt-D15b98He1?usp=sharing "Dallas Airbnb Data")
 
