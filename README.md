@@ -16,7 +16,7 @@ Our presentation highlighted many of the associations that we perceived as signi
 
 A challenge for us was trying to figure out a way to implement the amenities data and find the best way to clean the information. The way we went about this was to first use the ‘Find & Replace’ tool to get rid of the unnecessary open/close brackets, single quotes, and spaces. We then copied all the column information, pasted it into its own excel sheet, used the text-to-columns function to put each amenity into its own cell, highlighted all rows and columns with amentities data, renamed the highlighted box to “Amenities”, input the function: 
 
-	_“=INDEX(Amenities,1+INT((ROW(A1)-1)/COLUMNS(Amenities)),MOD(ROW(A1)-1+COLUMNS(Amenities),COLUMNS(Amenities))+1_ 
+	=INDEX(Amenities,1+INT((ROW(A1)-1)/COLUMNS(Amenities)),MOD(ROW(A1)-1+COLUMNS(Amenities),COLUMNS(Amenities))+1
 to put all of the cells into one row. After, we input the =UNIQUE function in a new column to find all unique cells from the amenities, then did the =COUNTIF function to see how many occurrences of each unique amenity appears. We were able to find the top amenities by number of occurrences so that we could make a recommendation for Sara on what’s important to Airbnb guests.
  
 ### Implementation
