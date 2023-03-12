@@ -16,7 +16,8 @@ Our presentation highlighted many of the associations that we perceived as signi
 
 A challenge for us was trying to figure out a way to implement the amenities data and find the best way to clean the information. The way we went about this was to first use the ‘Find & Replace’ tool to get rid of the unnecessary open/close brackets, single quotes, and spaces. We then copied all the column information, pasted it into its own excel sheet, used the text-to-columns function to put each amenity into its own cell, highlighted all rows and columns with amentities data, renamed the highlighted box to “Amenities”, input the function: 
 
-_“=INDEX(Amenities,1+INT((ROW(A1)-1)/COLUMNS(Amenities)),MOD(ROW(A1)-1+COLUMNS(Amenities),COLUMNS(Amenities))+1_ to put all of the cells into one row. After, we input the =UNIQUE function in a new column to find all unique cells from the amenities, then did the =COUNTIF function to see how many occurrences of each unique amenity appears. We were able to find the top amenities by number of occurrences so that we could make a recommendation for Sara on what’s important to Airbnb guests.
+	_“=INDEX(Amenities,1+INT((ROW(A1)-1)/COLUMNS(Amenities)),MOD(ROW(A1)-1+COLUMNS(Amenities),COLUMNS(Amenities))+1_ 
+to put all of the cells into one row. After, we input the =UNIQUE function in a new column to find all unique cells from the amenities, then did the =COUNTIF function to see how many occurrences of each unique amenity appears. We were able to find the top amenities by number of occurrences so that we could make a recommendation for Sara on what’s important to Airbnb guests.
  
 ### Implementation
 In order to make a recommendation for Sara’s property we needed an understanding of long term and short term rentals in the city of Dallas and an analysis of host involvement for each type of property to find the option that would ask the least of Sara and allow her to appropriately cover the costs of the property while she is in her program.
@@ -39,7 +40,7 @@ Once we were able to calculate an estimated occupancy rate using the San Francis
 
 ### Regression Analysis: 
 
-![regression](https://github.com/yamatokashima/Airbnb_Project/blob/master/Regression.png)
+![regression](https://user-images.githubusercontent.com/101782618/224577157-076f63c0-3896-4961-ac16-675adb9df845.png)
 
 Once we confirmed our key metric as occupancy rate, we outlined our analysis as follows:
 
